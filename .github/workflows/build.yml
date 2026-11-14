@@ -9,9 +9,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-      - name: Build with Gradle directly
+      - name: Set up Android SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk
+          echo "ANDROID_HOME=/usr/lib/android-sdk" >> $GITHUB_ENV
+          yes | sdkmanager --licenses || true
+      - name: Build
         run: |
           gradle wrapper --gradle-version 8.2
           ./gradlew assembleDebug
