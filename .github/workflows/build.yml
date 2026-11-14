@@ -15,10 +15,8 @@ jobs:
           sudo apt-get install -y android-sdk
           echo "ANDROID_HOME=/usr/lib/android-sdk" >> $GITHUB_ENV
           yes | sdkmanager --licenses || true
-      - name: Build
-        run: |
-          gradle wrapper --gradle-version 8.2
-          ./gradlew assembleDebug
+      - name: Build with system gradle
+        run: gradle assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: locker-apk
