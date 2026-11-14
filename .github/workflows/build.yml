@@ -9,19 +9,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Fix Gradle structure
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Build with Gradle directly
         run: |
-          # Создаем файл настроек, чтобы Gradle нашел плагин
-          echo "pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }" > settings.gradle
-          echo "dependencyResolutionManagement { repositories { google(); mavenCentral() } }" >> settings.gradle
-          echo "rootProject.name = \"locker\"" >> settings.gradle
-          echo "include ':app'" >> settings.gradle
-          
-          # Пересоздаем build.gradle в корне
-          echo "buildscript { dependencies { classpath 'com.android.tools.build:gradle:8.2.0' } }" > build.gradle
-          echo "allprojects { repositories { google(); mavenCentral() } }" >> build.gradle
-      - name: Build
-        run: gradle wrapper && ./gradlew assembleDebug
+          gradle wrapper --gradle-version 8.2
+          ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: locker-apk
