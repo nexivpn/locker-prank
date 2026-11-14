@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
+
 android {
     namespace 'com.locker'
     compileSdk 34
+
     defaultConfig {
         applicationId 'com.locker'
         minSdk 26
