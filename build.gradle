@@ -1,22 +1,15 @@
-apply plugin: 'com.android.application'
-
-android {
-    namespace 'com.locker'
-    compileSdk 34
-
-    defaultConfig {
-        applicationId 'com.locker'
-        minSdk 26
-        targetSdk 34
-        versionCode 1
-        versionName '1.0'
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.0'
     }
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
+}
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
     }
 }
